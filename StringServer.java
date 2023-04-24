@@ -9,17 +9,14 @@ class Handler implements URLHandler {
 
     public String handleRequest(URI url) {
         if (url.getPath().equals("/")) {
-            return String.format("Royce's Number: %d", num);
-        } else if (url.getPath().equals("/increment")) {
-            num += 1;
-            return String.format("Number incremented!");
+            return String.format("%s", str);
         } else {
             System.out.println("Path: " + url.getPath());
             if (url.getPath().contains("/add-message")) {
                 String[] parameters = url.getQuery().split("=");
                 if (parameters[0].equals("s")) {
-                    str = parameters[1];
-                    return String.format("%s \n %d", parameters[1], str);
+                    str += parameters[1] + "\n";
+                    return String.format(str);
                 }
             }
             return "404 Not Found!";
